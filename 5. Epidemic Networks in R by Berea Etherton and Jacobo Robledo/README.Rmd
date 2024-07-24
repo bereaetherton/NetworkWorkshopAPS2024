@@ -9,22 +9,112 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## SIR Modeling:
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+- *sir_model function:* Defines the differential equations for the SIR model.
+- *Initial conditions and parameters:* Sets the initial state of the population and the model parameters (transmission and recovery rates).
+- *Time frame:* Defines the period over which the simulation runs.
+- *Solving the SIR model:* Uses the ode function from the deSolve package to solve the differential equations.
+- *Plotting:* Visualizes the proportions of the susceptible, infected, and recovered populations over time.
+- *Basic Reproduction Number (R0):* Calculates the basic reproduction number to understand the spread potential of the disease.
 
 ```{r cars}
-summary(cars)
+#------------SIR Modeling----------#
+
+# First, download deSolve from https://desolve.r-forge.r-project.org/
+# which is a differential equations package
+#install.packages("deSolve") 
+library("deSolve")
+
+# Define the SIR model function
+sir_model <- function(time, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dS <- -beta * S * I # Rate of change of the Susceptible class
+    dI <- beta * S * I - gamma * I # Rate of change of the Infected class
+    dR <- gamma * I # Rate of change of the Recovered class
+    
+    # Return the rate of change for each class
+    list(c(dS, dI, dR))
+  })
+}
+
+# Initial conditions
+initial_state <- c(S = 0.99, # 99% susceptible
+                   I = 0.01, # 1% infected
+                   R = 0.00) # 0% recovered
+
+# Parameters
+parameters <- c(beta = 0.3,  # Transmission rate
+                gamma = 0.1) # Recovery rate
+
+# Time frame
+times <- seq(0, 160, by = 1) # Simulate for 160 days
+
+# Solve the SIR problem
+out <- ode(y = initial_state, times = times, func = sir_model, parms = parameters)
+
+# After 130 days, for example...
+out[130,]
+# This shows the proportion of the population in each class
+
+# Convert the output to a data frame for plotting
+out_df <- as.data.frame(out)
+plot(out_df$time, out_df$S, type = "l", col = "blue", ylim = c(0, 1), xlab = "Time", ylab = "Proportion", lwd = 2,
+     main = "SIR Model")
+lines(out_df$time, out_df$I, col = "red", lwd = 2)
+lines(out_df$time, out_df$R, col = "green", lwd = 2)
+legend("right", legend = c("Susceptible", "Infected", "Recovered"), col = c("blue", "red", "green"), lwd = 2)
+
+# Basic Reproduction number
+R_0 <- parameters[1] / parameters[2] # R0 = beta / gamma
+R_0
+# This shows how many individuals (or plants) an individual will spread the disease to
 ```
 
-## Including Plots
+## Epidemic Networks:
 
-You can also embed plots, for example:
+*Random Network:* Creates and plots a random network using the Erdős–Rényi model.
+*Small World Network:* Creates and plots a small-world network and calculates its average local transitivity (a measure of the clustering coefficient).
+*Scale-Free Network:* Creates and plots a scale-free network using the Barabási–Albert model and calculates its average degree.
+*Degree Distribution:* Plots the degree distribution histograms for the small-world and scale-free networks to analyze their structure.
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#------Epidemic Networks-------#
+
+library(igraph)
+
+# Random Network
+num_nodes <- 20
+prob_of_connections <- 0.1
+random_network <- erdos.renyi.game(n = num_nodes, p = prob_of_connections,
+                                   type = "gnp", directed = FALSE)
+plot(random_network,
+     vertex.size = 20, vertex.color = "yellow",
+     vertex.label.cex = 0.8, edge.curved = FALSE)
+
+# Small World Network
+small_world <- graph(c(1,2,2,3,3,1,1,4,4,5,5,1,1,6,1,7), directed = FALSE)
+plot(small_world)
+
+# Calculate the average local transitivity (clustering coefficient)
+(1/7) * sum(transitivity(small_world, type = "local"), na.rm = TRUE)
+
+# Scale-Free Network
+scale_free_network <- barabasi.game(n = 20, m = 2, directed = FALSE)
+
+# Plot the scale-free network
+plot(scale_free_network,
+     vertex.size = 20,
+     vertex.color = "yellow", vertex.label.cex = 0.8,
+     edge.arrow.size = 0.5,
+     edge.curved = FALSE)
+
+# Optional: Calculate and print the average degree of the network
+avg_degree <- mean(degree(scale_free_network))
+avg_degree
+
+# Look at the degree distribution of the networks
+hist(degree(small_world))
+hist(degree(scale_free_network))
+```
