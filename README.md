@@ -31,13 +31,15 @@ ADD INFO
 
 ### 5. Epidemic Networks in R by Berea Etherton and Jacobo Robledo
 
-In this directory the material for session 5 is present. In this session we will explore 
-* SIR Modeling
-* Network-Based Epidemic Models 
-* Random Networks
-* Scale-Free Networks
-* Small-World Networks
-* Simulations
+This directory contains the materials for Session 5. In this session, we will explore the following topics:
+
+- SIR Modeling
+- Network-Based Epidemic Models
+- Random Networks
+- Scale-Free Networks
+- Small-World Networks
+- Simulations
+
 
 
 ### 6. Microbiome Networks in R by Ashish Adhikari
