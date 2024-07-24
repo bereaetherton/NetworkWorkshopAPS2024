@@ -9,9 +9,43 @@ For more information, go to our website: [www.garrettlab.com](http://www.garrett
 
 ## Content of the workshop:
 ### 1. Introduction to workshop and introductions by Karen Garrett
+
+ADD INFO
+
 ### 2. Introduction to Networks by Aaron Plex Sulá
+
+ADD INFO
+
+
 ### 3. Introduction to R by Romaric Armel Mouafo Tchinda
+
+
+ADD INFO
+
+
+
 ### 4. Networks in R by Romaric Armel Mouafo Tchinda and Aaron Plex Sulá
+
+ADD INFO
+
+
 ### 5. Epidemic Networks in R by Berea Etherton and Jacobo Robledo
+
+This directory contains the materials for Session 5. In this session, we will explore the following topics:
+
+- SIR Modeling
+- Network-Based Epidemic Models
+- Random Networks
+- Scale-Free Networks
+- Small-World Networks
+- Simulations
+
+
+
 ### 6. Microbiome Networks in R by Ashish Adhikari
+
+ADD INFO
+
 ### 7. Rapid Risk assessment to support Mitigation of diseases and pests (R2M) toolbox by Karen Garrett
+
+ADD INFO
