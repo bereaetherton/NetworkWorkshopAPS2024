@@ -15,3 +15,4 @@ For more information, go to our website: [www.garrettlab.com](http://www.garrett
 ### 5. Epidemic Networks in R by Berea Etherton and Jacobo Robledo
 ### 6. Microbiome Networks in R by Ashish Adhikari
 ### 7. Rapid Risk assessment to support Mitigation of diseases and pests (R2M) toolbox by Karen Garrett
+![Karen Garrett](./Pictures/Karen_Garret.jpg)
