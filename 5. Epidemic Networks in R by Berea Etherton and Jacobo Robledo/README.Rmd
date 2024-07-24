@@ -186,7 +186,9 @@ p <- ggplot(simulation_results, aes(x = time)) +
 
 
 ```
-
+```{SI Modeling in Networks}
+#testing testing
+```
 
 
 ```{r}
