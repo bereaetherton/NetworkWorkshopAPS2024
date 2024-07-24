@@ -10,7 +10,7 @@ For more information, go to our website: [www.garrettlab.com](http://www.garrett
 ## Content of the workshop:
 ### 1. Introduction to workshop and introductions by Karen Garrett
 ### 2. Introduction to Networks by Aaron Plex Sulá
-### 3. Introduction to R by 
+### 3. Introduction to R by Romaric Armel Mouafo Tchinda
 ### 4. Networks in R by Romaric Armel Mouafo Tchinda and Aaron Plex Sulá
 ### 5. Epidemic Networks in R by Berea Etherton and Jacobo Robledo
 ### 6. Microbiome Networks in R by Ashish Adhikari
